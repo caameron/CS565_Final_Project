@@ -4,6 +4,7 @@
     <!--Using google maps api, implementation based on documentation here  https://developers.google.com/maps/documentation/javascript/tutorial-->
     <meta charset="utf-8">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" type="text/css" href="./home.css">
     <title>CS565 Project</title>
     <style>
@@ -31,6 +32,18 @@
   <script type="text/javascript">
     $("#to_results").click(() =>{
       location.href = "results";
+    });
+
+    var objectSocket = io.connect("/");
+    objectSocket.on('done', () => {
+      console.log("HI");
+      objectSocket.emit('ret', {
+        'done': 'done'
+      });
+    });
+
+    objectSocket.on('data', function(data) {
+      console.log(data.data);
     });
 
     // initMap = () => {
