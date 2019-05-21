@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <link rel="stylesheet" type="text/css" href="./home.css">
     <title>CS565 Project</title>
     <style>
     #map{
@@ -18,12 +17,11 @@
     <div class="test">
       home htm
     </div>
-    <form action="/searchData"  method="POST">
-      <div class=searchContainer>
-        <input type="text" name="searchCriteria" placeholder="search" value="ddd">
-        <input type="submit" value ="search">
-      </div>
-    </form>
+    <div class=searchContainer>
+      <input type="text" id="searchCriteria" name="searchCriteria" placeholder="search" value="ddd">
+      <!-- <input type="submit" id="searchButton" value ="search"> -->
+      <button id="searchButton">search</button>
+    </div>
     <button type="button" id="to_results">RESULTS SUBMIT</button>
     <br>
     <div id="map"></div>
@@ -35,15 +33,18 @@
     });
 
     var objectSocket = io.connect("/");
-    objectSocket.on('done', () => {
-      console.log("HI");
-      objectSocket.emit('ret', {
-        'done': 'done'
+
+    $('#searchButton').on('click', () => {
+      objectSocket.emit('searchData', {
+        'query': $("#searchCriteria").val()
       });
     });
 
-    objectSocket.on('data', function(data) {
-      console.log(data.data);
+    objectSocket.on('searchResults', (data) => {
+      console.log(data.results);
+      console.log(data.query);
+      $("#map").append(data.results);
+
     });
 
     // initMap = () => {
@@ -54,7 +55,7 @@
     //   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
     // }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv4A1my3d9B16HqH_6tHPXwSbAoZILZx4&callback=initMap"
     async defer>
   </script>
 </html>
