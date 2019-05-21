@@ -17,20 +17,21 @@
     <div class="test">
       home htm
     </div>
-    <div class=searchContainer>
-      <input type="text" placeholder="search">
-      <input type="button" value="search">
-
-    </div>
+    <form action="/searchData"  method="POST">
+      <div class=searchContainer>
+        <input type="text" name="searchCriteria" placeholder="search" value="ddd">
+        <input type="submit" value ="search">
+      </div>
+    </form>
     <button type="button" id="to_results">RESULTS SUBMIT</button>
     <br>
     <div id="map"></div>
   </body>
 
   <script type="text/javascript">
-    // $("#to_results").click(() =>{
-    //   location.href = "results";
-    // });
+    $("#to_results").click(() =>{
+      location.href = "results";
+    });
 
     // initMap = () => {
     //   var mapOptions = {
