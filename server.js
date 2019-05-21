@@ -7,7 +7,7 @@ var socket = require('socket.io');
 
 var server = express();
 var googleMapsClient = require('@google/maps').createClient({
-  key: 'AIzaSyDv4A1my3d9B16HqH_6tHPXwSbAoZILZx4'
+  key: d
 });
 server.use(parser.json());
 server.use(parser.urlencoded({extended: true}));
