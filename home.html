@@ -25,6 +25,7 @@
     <button type="button" id="to_results">RESULTS SUBMIT</button>
     <br>
     <div id="map"></div>
+    <div id="choices"></div>
   </body>
 
   <script type="text/javascript">
@@ -41,10 +42,16 @@
     });
 
     objectSocket.on('searchResults', (data) => {
-      console.log(data.results);
-      console.log(data.query);
-      $("#map").append(data.results);
-
+      $("#choices").empty();
+      var length = data.results.length;
+      var selectList = $("<select id=\"choiceList\"/>").attr("size", length);
+      for(result in data.results)
+      {
+        console.log(data.results[result].formatted_address);
+        var choice = $("<option />", {value: result, text: data.results[result].formatted_address});
+        selectList.append(choice);
+      }
+      $("#choices").append(selectList);
     });
 
     // initMap = () => {
