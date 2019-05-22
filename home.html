@@ -1,18 +1,61 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <!--Using google maps api, implementation based on documentation here  https://developers.google.com/maps/documentation/javascript/tutorial-->
     <meta charset="utf-8">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <title>CS565 Project</title>
+    <style>
+    #map{
+      height: 400px;
+      width: 100%;
+    }
+    </style>
   </head>
   <body>
-    home html
-    <button type="button" id="to_results">RESULTS</button>
+    <div class="test">
+      home htm
+    </div>
+    <div class=searchContainer>
+      <input type="text" id="searchCriteria" name="searchCriteria" placeholder="search" value="ddd">
+      <!-- <input type="submit" id="searchButton" value ="search"> -->
+      <button id="searchButton">search</button>
+    </div>
+    <button type="button" id="to_results">RESULTS SUBMIT</button>
+    <br>
+    <div id="map"></div>
   </body>
 
   <script type="text/javascript">
     $("#to_results").click(() =>{
       location.href = "results";
     });
+
+    var objectSocket = io.connect("/");
+
+    $('#searchButton').on('click', () => {
+      objectSocket.emit('searchData', {
+        'query': $("#searchCriteria").val()
+      });
+    });
+
+    objectSocket.on('searchResults', (data) => {
+      console.log(data.results);
+      console.log(data.query);
+      $("#map").append(data.results);
+
+    });
+
+    // initMap = () => {
+    //   var mapOptions = {
+    //     center: {lat: 19.8968, lng:-155.5828},
+    //     zoom: 8
+    //   }
+    //   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    // }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv4A1my3d9B16HqH_6tHPXwSbAoZILZx4&callback=initMap"
+    async defer>
   </script>
 </html>
