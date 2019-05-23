@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="key.js"></script>
     <title>CS565 Project</title>
     <style>
     #map{
@@ -18,7 +19,7 @@
       home htm
     </div>
     <div class=searchContainer>
-      <input type="text" id="searchCriteria" name="searchCriteria" placeholder="search" value="ddd">
+      <input type="text" id="searchCriteria" name="searchCriteria" placeholder="search" value="park">
       <!-- <input type="submit" id="searchButton" value ="search"> -->
       <button id="searchButton">search</button>
       <button id="geolocation">around me</button>
@@ -26,6 +27,7 @@
     <button type="button" id="to_results">RESULTS SUBMIT</button>
     <br>
     <div id="map"></div>
+    <div id="choices"></div>
   </body>
 
   <script type="text/javascript">
@@ -37,7 +39,10 @@
 
     $('#searchButton').on('click', () => {
       objectSocket.emit('searchData', {
-        'query': $("#searchCriteria").val()
+        'query': $("#searchCriteria").val(),
+        'lat': 45.5155,
+        'long': -122.6793,
+        'geo': false
       });
     });
 
@@ -61,12 +66,19 @@
     }
 
     objectSocket.on('searchResults', (data) => {
-      console.log(data.results);
-      console.log(data.query);
-      $("#map").append(data.results);
-
+      $("#choices").empty();
+      var length = data.results.length;
+      var selectList = $("<select id=\"choiceList\"/>").attr("size", length);
+      for(result in data.results)
+      {
+        console.log(data.results[result].formatted_address);
+        var choice = $("<option />", {value: result, text: data.results[result].formatted_address});
+        selectList.append(choice);
+      }
+      $("#choices").append(selectList);
     });
 
+    console.log(myKey);
     // initMap = () => {
     //   var mapOptions = {
     //     center: {lat: 19.8968, lng:-155.5828},
@@ -75,7 +87,7 @@
     //   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
     // }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv4A1my3d9B16HqH_6tHPXwSbAoZILZx4&callback=initMap"
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv4A1my3d9B16HqH_6tHPXwSbAoZILZx4&callback=initMap"
     async defer>
-  </script>
+  </script> -->
 </html>
