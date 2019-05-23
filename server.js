@@ -4,10 +4,12 @@ var express = require('express');
 var path = require('path');
 var parser = require('body-parser');
 var socket = require('socket.io');
+var myKey = require('./key.js');
 
 var server = express();
+server.use(express.static(__dirname + '/public'));
 var googleMapsClient = require('@google/maps').createClient({
-  key: 'AIzaSyDv4A1my3d9B16HqH_6tHPXwSbAoZILZx4'
+  key: myKey
 });
 server.use(parser.json());
 server.use(parser.urlencoded({extended: true}));
@@ -18,12 +20,39 @@ let dataSearch = 'toBeFilled';
 
 io.on('connection', (objectSocket) => {
   console.log("CONNECTED");
-
   //When data is sent, use places api to search for nearby places and then
   //send them back to client using socket
+  //   objectSocket.on('searchData', (data) => {
+  //     console.log(data);
+  //     var long = Number(data.long);
+  //     var lat = Number(data.lat);
+  //     console.log(typeof 45.22);
+  //     console.log(long);
+  //     googleMapsClient.places({
+  //       query: data.query,
+  //       language: 'en',
+  //       location: {"lat":data.lat, "lng":data.long},
+  //       radius: 5000,
+  //       minprice: 1,
+  //       maxprice: 4,
+  //       opennow: true
+  //       }, (err, response) => {
+  //       if(!err){
+  //         dataSearch = response.json.results;
+  //         objectSocket.emit('searchResults', {
+  //           'results': dataSearch,
+  //           'query': data.query
+  //         });
+  //       }
+  //       else{
+  //         console.log(err);
+  //       }
+  //     });
+  // });
   objectSocket.on('searchData', (data) => {
     if (data.geo === true){
       console.log(data.long + " " + data.lat);
+      console.log(data);
       googleMapsClient.places({
         query: data.query,
         language: 'en',
@@ -49,7 +78,7 @@ io.on('connection', (objectSocket) => {
       googleMapsClient.places({
         query: data.query,
         language: 'en',
-        location: [45.5155, -122.6793],
+        location: [data.lat, data.long],
         radius: 5000,
         minprice: 1,
         maxprice: 4,
@@ -75,13 +104,6 @@ server.get('/', (req, res) => {
   res.status(200);
   res.sendFile(path.join(__dirname + '/home.html'))
 });
-
-//Get location or name of hike from client
-// server.post('/searchData', (req, res) => {
-//   res.status(302);
-//   res.location('/');
-//   res.end();
-// });
 
 //Results Page
 server.get('/results', (req, res) => {
