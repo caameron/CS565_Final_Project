@@ -21,6 +21,7 @@
       <input type="text" id="searchCriteria" name="searchCriteria" placeholder="search" value="ddd">
       <!-- <input type="submit" id="searchButton" value ="search"> -->
       <button id="searchButton">search</button>
+      <button id="geolocation">around me</button>
     </div>
     <button type="button" id="to_results">RESULTS SUBMIT</button>
     <br>
@@ -40,6 +41,25 @@
         'query': $("#searchCriteria").val()
       });
     });
+
+    $('#geolocation').on('click', () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getCurrent);
+      } else {
+        alert("current location not found");
+      }
+    });
+
+    function getCurrent(pos){
+      var latitude = pos.coords.latitude;
+      var longitude = pos.coords.longitude;
+      objectSocket.emit('searchData', {
+        'query': 'hike',
+        'lat': latitude,
+        'long': longitude,
+        'geo': true
+      });
+    }
 
     objectSocket.on('searchResults', (data) => {
       $("#choices").empty();
