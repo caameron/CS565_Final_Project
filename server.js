@@ -57,7 +57,7 @@ io.on('connection', (objectSocket) => {
         query: data.query,
         language: 'en',
         location: [data.lat, data.long],
-        radius: 10000,
+        radius: 100000,
         minprice: 1,
         maxprice: 4,
         opennow: true

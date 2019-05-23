@@ -31,6 +31,11 @@
   </body>
 
   <script type="text/javascript">
+
+    // long and lat of the current selected place. default portland
+    let lat = 45.5155;
+    let long = -122.6793;
+
     $("#to_results").click(() =>{
       location.href = "results";
     });
@@ -71,23 +76,27 @@
       var selectList = $("<select id=\"choiceList\"/>").attr("size", length);
       for(result in data.results)
       {
-        console.log(data.results[result].formatted_address);
+        console.log(data.results[result]);
         var choice = $("<option />", {value: result, text: data.results[result].formatted_address});
         selectList.append(choice);
       }
       $("#choices").append(selectList);
+      lat = data.results[0].geometry.location.lat;
+      long = data.results[0].geometry.location.lng;
+      initMap();
     });
 
-    console.log(myKey);
-    // initMap = () => {
-    //   var mapOptions = {
-    //     center: {lat: 19.8968, lng:-155.5828},
-    //     zoom: 8
-    //   }
-    //   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    // }
+    initMap = () => {
+      var mapOptions = {
+        center: {lat: lat, lng:long},
+        zoom: 14
+      }
+      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    }
   </script>
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv4A1my3d9B16HqH_6tHPXwSbAoZILZx4&callback=initMap"
-    async defer>
-  </script> -->
+
+  <script id="mapsScript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt_YlKrQAlnqEYjcaRwUAuAMat60S578E&callback=initMap"
+   async defer>
+  </script>
+
 </html>
