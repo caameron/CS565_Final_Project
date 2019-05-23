@@ -27,7 +27,11 @@
     <button type="button" id="to_results">RESULTS SUBMIT</button>
     <br>
     <div id="map"></div>
-    <div id="choices"></div>
+    <div id="choicesContainer">
+      <select id="choices" size="5">
+        <option value="First" selected="selected">Search Results</option>
+      </select>
+    </div>
   </body>
 
   <script type="text/javascript">
@@ -72,12 +76,11 @@
 
     objectSocket.on('searchResults', (data) => {
       $("#choices").empty();
-      var length = data.results.length;
-      var selectList = $("<select id=\"choiceList\"/>").attr("size", length);
+      var selectList = $("#choices");
       for(result in data.results)
       {
-        console.log(data.results[result]);
-        var choice = $("<option />", {value: result, text: data.results[result].formatted_address});
+        var optionValue = data.results[result].geometry.location.lat + "," + data.results[result].geometry.location.lng;
+        var choice = $("<option />", {value: optionValue, text: data.results[result].formatted_address});
         selectList.append(choice);
       }
       $("#choices").append(selectList);
@@ -86,12 +89,27 @@
       initMap();
     });
 
+    //On change of selection update google map to the selected area
+    $("#choices").on('change', () => {
+      var newLocation = $("#choices option:selected").val().split(',');
+      lat = Number(newLocation[0]);
+      long = Number(newLocation[1]);
+      initMap();
+    });
+
     initMap = () => {
       var mapOptions = {
         center: {lat: lat, lng:long},
         zoom: 14
       }
+
       var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      //Add marker
+      var marker = new google.maps.Marker({
+        position: {lat: lat, lng: long},
+        map: map
+      });
     }
   </script>
 
