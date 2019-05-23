@@ -4,7 +4,7 @@ var express = require('express');
 var path = require('path');
 var parser = require('body-parser');
 var socket = require('socket.io');
-var myKey = require('./key.js');
+var myKey = require('./public/key.js');
 
 var server = express();
 server.use(express.static(__dirname + '/public'));
