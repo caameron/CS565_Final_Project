@@ -13,13 +13,57 @@ body {
   margin: 0;
 }
 
+.description-container {
+  text-align: center;
+  background-color: blue;
+  height: 300px;
+  width: 100%;
+}
+
 .content-container {
   margin: 0 15px;
+  height: 1000px;
   display: grid;
+  grid-template-columns: [one] 35%  [two] 2.5% [three] 10% [four] 5% [five] 47.5%;
+  grid-template-rows: [top] 12.5% [mid] 12.5% [bottom] 75%;
 }
 
 #map {
-  height: 400px;
+  height: 100%;
   width: 100%;
   background-color: antiquewhite;
+  grid-column-start: five;
+  grid-row-start: top;
+  grid-row-end: end;
+}
+
+#searchCriteria {
+  grid-column-start: one;
+  grid-row-start: top;
+  grid-row-end: bottom;
+}
+
+#searchButton {
+  grid-column-start: three;
+  grid-column-end: four;
+  grid-row-start: top;
+  grid-row-end: mid;
+}
+
+#geolocation {
+  grid-column-start: three;
+  grid-column-end: four;
+  grid-row-start: mid;
+  grid-row-end: bottom;
+}
+
+#choicesContainer {
+  grid-column-start: one;
+  grid-column-end: four;
+  grid-row-start: bottom;
+}
+
+#choices {
+ width: 100%;
+ height: 100%;
 }
