@@ -1,4 +1,25 @@
+body {
+  margin: 0;
+}
+
+.header {
+  height: 100px;
+  width: 100%;
+  text-align: center;
+  background-color: aqua;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.content-container {
+  margin: 0 15px;
+  display: grid;
+}
+
 #map {
   height: 400px;
   width: 100%;
+  background-color: antiquewhite;
 }

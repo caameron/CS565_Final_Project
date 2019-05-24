@@ -11,23 +11,29 @@
     <title>CS565 Project</title>
   </head>
   <body>
-    <div class=searchContainer>
-      <input type="text" id="searchCriteria" name="searchCriteria" placeholder="search" value="park">
-      <button id="searchButton">search</button>
-      <button id="geolocation">around me</button>
+    <div class="header">
+      <h1>Project Title and Picture</h1>
+      <!-- image here -->
     </div>
-    <button type="button" id="to_results">RESULTS SUBMIT</button>
-    <br>
-    <div id="map"></div>
-    <div id="choicesContainer">
-      <select id="choices" size="5">
-        <option value="First" selected="selected">Search Results</option>
-      </select>
+    <div class="content-container">
+      <div class="searchContainer">
+        <input type="text" id="searchCriteria" name="searchCriteria" placeholder="search" value="park">
+        <button id="searchButton">search</button>
+        <button id="geolocation">around me</button>
+      </div>
+      <button type="button" id="to_results">RESULTS SUBMIT</button>
+      <br>
+      <div id="map"></div>
+      <div id="choicesContainer">
+        <select id="choices" size="5">
+          <option value="First" selected="selected">Search Results</option>
+        </select>
+      </div>
     </div>
   </body>
 
-  <script id="mapsScript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt_YlKrQAlnqEYjcaRwUAuAMat60S578E&callback=initMap"
+  <!-- <script id="mapsScript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt_YlKrQAlnqEYjcaRwUAuAMat60S578E&callback=initMap"
    async defer>
-  </script>
+  </script> -->
 
 </html>
