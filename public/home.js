@@ -5,6 +5,7 @@ $(document).ready( () => {
     let lat = 45.5155;
     let long = -122.6793;
     let option = "Portland Trials"
+
     console.log(option);
 
     // $("#to_results").click(() =>{
@@ -14,11 +15,6 @@ $(document).ready( () => {
     var objectSocket = io.connect("/");
 
     $("#to_results").click(() =>{
-      objectSocket.emit('searchWeather', {
-        'selection': option,
-        'lat': lat,
-        'long': long,
-      });
       location.href = "results";
     });
 
@@ -64,6 +60,11 @@ $(document).ready( () => {
       console.log(option);
       lat = data.results[0].geometry.location.lat;
       long = data.results[0].geometry.location.lng;
+      //set local storage for these results so that results.html can use this info
+      //otherwise run into asnych issues without this local storage.
+      localStorage.setItem('lat',data.results[0].geometry.location.lat);
+      localStorage.setItem('long',data.results[0].geometry.location.lng);
+      localStorage.setItem('option',data.results[0].formatted_address);
       initMap();
     });
 
@@ -74,6 +75,11 @@ $(document).ready( () => {
       console.log(option);
       lat = Number(newLocation[0]);
       long = Number(newLocation[1]);
+      //set local storage for these results so that results.html can use this info
+      //otherwise run into asnych issues without this local storage.
+      localStorage.setItem('lat',Number(newLocation[0]));
+      localStorage.setItem('long',Number(newLocation[1]));
+      localStorage.setItem('option',$("#choices option:selected").text());
       initMap();
     });
 
