@@ -4,12 +4,23 @@ $(document).ready( () => {
     // long and lat of the current selected place. default portland
     let lat = 45.5155;
     let long = -122.6793;
+    let option = "Portland Trials"
+    console.log(option);
 
-    $("#to_results").click(() =>{
-      location.href = "results";
-    });
+    // $("#to_results").click(() =>{
+    //   location.href = "results";
+    // });
 
     var objectSocket = io.connect("/");
+
+    $("#to_results").click(() =>{
+      objectSocket.emit('searchWeather', {
+        'selection': option,
+        'lat': lat,
+        'long': long,
+      });
+      location.href = "results";
+    });
 
     $('#searchButton').on('click', () => {
       objectSocket.emit('searchData', {
@@ -49,6 +60,8 @@ $(document).ready( () => {
         selectList.append(choice);
       }
       $("#choices").append(selectList);
+      option = data.results[0].formatted_address;
+      console.log(option);
       lat = data.results[0].geometry.location.lat;
       long = data.results[0].geometry.location.lng;
       initMap();
@@ -57,6 +70,8 @@ $(document).ready( () => {
     //On change of selection update google map to the selected area
     $("#choices").on('change', () => {
       var newLocation = $("#choices option:selected").val().split(',');
+      option = $("#choices option:selected").text();
+      console.log(option);
       lat = Number(newLocation[0]);
       long = Number(newLocation[1]);
       initMap();
