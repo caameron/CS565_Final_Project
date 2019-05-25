@@ -5,6 +5,7 @@ var path = require('path');
 var parser = require('body-parser');
 var socket = require('socket.io');
 var myKey = require('./public/key.js');
+var https = require('https');
 
 var server = express();
 server.use(express.static(__dirname + '/public'));
@@ -96,6 +97,22 @@ io.on('connection', (objectSocket) => {
         }
       });
     }
+  });
+  objectSocket.on('searchWeather', (data) => {
+    console.log("HEREER");
+    https.get('https://api.openweathermap.org/data/2.5/weather?lat='+data.lat+'&lon='+data.long+'&appid=9fa05a0944cccb31dad4729352b5c805', (resp) => {
+    let data = '';
+
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    resp.on('end', () => {
+      console.log(data);
+    });
+    }).on("error", (err) => {
+      console.log("Error: " + err.message);
+    });
   });
 });
 
