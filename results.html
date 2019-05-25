@@ -3,12 +3,32 @@
   <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <title>CS565 Project Results Page</title>
     <title></title>
+    <style type="text/css">
+    .jumbotron{
+      margin-top: 20px;
+      background-image: url("public/blue-sky.jpg");
+      background-size: 100% 100%;
+      color: white;
+    }
+    h1 {
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+  font-size: 100px;
+}
+    </style>
   </head>
   <body>
-    results page html
-    <button type="button" id="to_home">HOME</button>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Weather Information</h1>
+        <button type="button" id = "to_home" class="btn btn-primary btn-lg">&larr; Back to Search</button>
+      </div>
+    </div>
+    <!-- <button type="button" id = "to_home" class="btn btn-primary btn-lg">&larr; Back to Search</button> -->
   </body>
 
   <script type="text/javascript">
