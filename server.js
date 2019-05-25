@@ -5,6 +5,7 @@ var path = require('path');
 var parser = require('body-parser');
 var socket = require('socket.io');
 var myKey = require('./public/key.js');
+var https = require('https');
 
 var server = express();
 server.use(express.static(__dirname + '/public'));
@@ -17,6 +18,11 @@ server.use(parser.urlencoded({extended: true}));
 
 var io = socket(server.listen(process.env.PORT || 3000));
 let dataSearch = 'toBeFilled';
+
+var lat_info = "";
+var long_info = "";
+var option_info = "";
+var info_info = "";
 
 io.on('connection', (objectSocket) => {
   console.log("CONNECTED");
@@ -96,6 +102,29 @@ io.on('connection', (objectSocket) => {
         }
       });
     }
+  });
+  objectSocket.on('searchWeather', (data) => {
+    console.log("HEREER");
+    https.get('https://api.openweathermap.org/data/2.5/weather?lat='+data.lat+'&lon='+data.long+'&appid=9fa05a0944cccb31dad4729352b5c805', (resp) => {
+    let weather = '';
+
+    resp.on('data', (chunk) => {
+      weather += chunk;
+    });
+
+    resp.on('end', () => {
+      console.log(weather);
+      var finalresult = JSON.parse(weather);
+      objectSocket.emit('weatherResults', {
+        'lat': data.lat,
+        'long': data.long,
+        'option': data.selection,
+        'info': finalresult
+      });
+    });
+    }).on("error", (err) => {
+      console.log("Error: " + err.message);
+    });
   });
 });
 
