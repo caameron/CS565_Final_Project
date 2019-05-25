@@ -6,88 +6,28 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="key.js"></script>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <script type="text/javascript" src="home.js"></script>
     <title>CS565 Project</title>
-    <style>
-    #map{
-      height: 400px;
-      width: 100%;
-    }
-    </style>
   </head>
   <body>
-    <div class="test">
-      home htm
-    </div>
     <div class=searchContainer>
       <input type="text" id="searchCriteria" name="searchCriteria" placeholder="search" value="park">
-      <!-- <input type="submit" id="searchButton" value ="search"> -->
       <button id="searchButton">search</button>
       <button id="geolocation">around me</button>
     </div>
     <button type="button" id="to_results">RESULTS SUBMIT</button>
     <br>
     <div id="map"></div>
-    <div id="choices"></div>
+    <div id="choicesContainer">
+      <select id="choices" size="5">
+        <option value="First" selected="selected">Search Results</option>
+      </select>
+    </div>
   </body>
 
-  <script type="text/javascript">
-    $("#to_results").click(() =>{
-      location.href = "results";
-    });
-
-    var objectSocket = io.connect("/");
-
-    $('#searchButton').on('click', () => {
-      objectSocket.emit('searchData', {
-        'query': $("#searchCriteria").val(),
-        'lat': 45.5155,
-        'long': -122.6793,
-        'geo': false
-      });
-    });
-
-    $('#geolocation').on('click', () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(getCurrent);
-      } else {
-        alert("current location not found");
-      }
-    });
-
-    function getCurrent(pos){
-      var latitude = pos.coords.latitude;
-      var longitude = pos.coords.longitude;
-      objectSocket.emit('searchData', {
-        'query': 'hike',
-        'lat': latitude,
-        'long': longitude,
-        'geo': true
-      });
-    }
-
-    objectSocket.on('searchResults', (data) => {
-      $("#choices").empty();
-      var length = data.results.length;
-      var selectList = $("<select id=\"choiceList\"/>").attr("size", length);
-      for(result in data.results)
-      {
-        console.log(data.results[result].formatted_address);
-        var choice = $("<option />", {value: result, text: data.results[result].formatted_address});
-        selectList.append(choice);
-      }
-      $("#choices").append(selectList);
-    });
-
-    console.log(myKey);
-    // initMap = () => {
-    //   var mapOptions = {
-    //     center: {lat: 19.8968, lng:-155.5828},
-    //     zoom: 8
-    //   }
-    //   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    // }
+  <script id="mapsScript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt_YlKrQAlnqEYjcaRwUAuAMat60S578E&callback=initMap"
+   async defer>
   </script>
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv4A1my3d9B16HqH_6tHPXwSbAoZILZx4&callback=initMap"
-    async defer>
-  </script> -->
+
 </html>
