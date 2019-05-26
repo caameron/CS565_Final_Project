@@ -18,6 +18,9 @@ $(document).ready( () => {
     console.log(data.long);
     console.log(data.option);
     console.log(data.info["weather"][0]["main"]);
+    console.log(data.info["weather"][0]["description"]);
     console.log(data.info["main"]);
+    var icon = "http://openweathermap.org/img/w/" + data.info["weather"][0]["icon"] + ".png";
+    $('#w_icon').attr('src', icon);
   });
 });
