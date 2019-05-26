@@ -1,0 +1,13 @@
+
+.jumbotron{
+  margin-top: 20px;
+  background-image: url("https://i1.wp.com/www.eeinnovationsltd.com/wp-content/uploads/2018/08/blue-sky.jpg?w=1920&ssl=1");
+  background-size: 100% 100%;
+  color: white;
+}
+
+#head_title {
+color: white;
+text-shadow: 2px 2px 4px #000000;
+font-size: 100px;
+}

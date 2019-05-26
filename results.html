@@ -7,59 +7,21 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="home.js"></script>
+    <script type="text/javascript" src="result.js"></script>
+    <link rel="stylesheet" type="text/css" href="result.css">
     <title>CS565 Project Results Page</title>
     <title></title>
-    <style type="text/css">
-    .jumbotron{
-      margin-top: 20px;
-      background-image: url("https://i1.wp.com/www.eeinnovationsltd.com/wp-content/uploads/2018/08/blue-sky.jpg?w=1920&ssl=1");
-      background-size: 100% 100%;
-      color: white;
-    }
-    h1 {
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
-  font-size: 100px;
-}
-    </style>
+    
   </head>
   <body>
     <div class="container">
       <div class="jumbotron">
-        <h1>Weather Information</h1>
+        <h1 id = head_title>Weather Information</h1>
         <button type="button" id = "to_home" class="btn btn-primary btn-lg">&larr; Back to Search</button>
       </div>
     </div>
     <!-- <button type="button" id = "to_home" class="btn btn-primary btn-lg">&larr; Back to Search</button> -->
-    <script type="text/javascript">
-      $(document).ready( () => {
-        var objectSocket = io.connect("/");
-
-        objectSocket.emit('searchWeather', {
-          'selection': localStorage.getItem('option'),
-          'lat': localStorage.getItem('lat'),
-          'long': localStorage.getItem('long'),
-        });
-
-        objectSocket.on('weatherResults', (data) => {
-          //going to display results of weather in grid with info recieved from server.
-          //need to convert kelvin to celius.
-          console.log(data.lat);
-          console.log(data.long);
-          console.log(data.option);
-          console.log(data.info["weather"][0]["main"]);
-          console.log(data.info["main"]);
-        });
-      });
-    </script>
-
 
   </body>
-
-  <script type="text/javascript">
-    $("#to_home").click(() =>{
-      location.href = "/";
-    });
-  </script>
 
 </html>
