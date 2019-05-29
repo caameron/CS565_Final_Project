@@ -3,18 +3,26 @@
   <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="home.js"></script>
+    <script type="text/javascript" src="result.js"></script>
+    <link rel="stylesheet" type="text/css" href="result.css">
     <title>CS565 Project Results Page</title>
     <title></title>
+
   </head>
   <body>
-    results page html
-    <button type="button" id="to_home">HOME</button>
-  </body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1 id = head_title>Weather Information</h1>
+        <button type="button" id = "to_home" class="btn btn-primary btn-lg">&larr; Back to Search</button>
+      </div>
+    </div>
+    <div><img id="w_icon" src="" alt="Weather icon"></div>
+    <!-- <button type="button" id = "to_home" class="btn btn-primary btn-lg">&larr; Back to Search</button> -->
 
-  <script type="text/javascript">
-    $("#to_home").click(() =>{
-      location.href = "/";
-    });
-  </script>
+  </body>
 
 </html>
