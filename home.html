@@ -28,19 +28,22 @@
     <div class="gradient">
     </div>
     <div class="content-container">
-      <input type="text" id="searchCriteria" class="form-control" name="searchCriteria" placeholder="search" value="park">
+      <input type="text" id="searchCriteria" class="form-control" name="searchCriteria" placeholder="Enter in a hike">
       <button id="searchButton" class="btn btn-primary">search</button>
       <button id="geolocation" class="btn btn-primary">Use Current Location</button>
       <br>
       <div id="map"></div>
       <div id="choicesContainer">
-        <select id="choices" class="custom-select" size="5">
+        <select id="choices" class="form-control" size="5">
           <option value="First" selected="selected">Search Results</option>
+        </select>
+      </div>
+      <div id="locationContainer">
+        <select id="locations" class="form-control">
         </select>
       </div>
       <button type="button" id="to_results" class="btn btn-primary">Get Weather</button>
     </div>
-    <footer></footer>
   </body>
 
   <script id="mapsScript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt_YlKrQAlnqEYjcaRwUAuAMat60S578E&callback=initMap"

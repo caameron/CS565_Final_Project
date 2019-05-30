@@ -71,7 +71,7 @@ body {
   grid-column-start: one;
   grid-column-end: four;
   grid-row-start: midbot;
-  grid-row-end: end
+  grid-row-end: bottom;
 }
 
 #choices {
@@ -86,6 +86,15 @@ body {
   grid-row-end: end;
 }
 
-.custom-select {
+#locationContainer {
+  margin: 10px;
+  grid-column-start: one;
+  grid-column-end: four;
+  grid-row-start: bottom;
 
+}
+
+.btn {
+  background-color: #8D8741;
+  border-color: #8D8741;
 }
