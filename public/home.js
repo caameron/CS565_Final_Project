@@ -1,16 +1,26 @@
 //Javascript file for home.html
 $(document).ready( () => {
 
+  // Get values of cities and their coordinates from local json file
+  // implementation based on : https://stackoverflow.com/questions/14484613/load-local-json-file-into-variable
+  var cities = (function() {
+    var cities = null;
+    $.ajax({
+        'async': false,
+        'global': false,
+        'url': "./cities.json",
+        'dataType': "json",
+        'success': function (data) {
+            cities = data;
+        }
+    });
+    return cities;
+    })();
+
     // long and lat of the current selected place. default portland
     let lat = 45.5155;
     let long = -122.6793;
     let option = "Portland Trials"
-
-    console.log(option);
-
-    // $("#to_results").click(() =>{
-    //   location.href = "results";
-    // });
 
     var objectSocket = io.connect("/");
 
@@ -19,10 +29,11 @@ $(document).ready( () => {
     });
 
     $('#searchButton').on('click', () => {
+      console.log("DS");
       objectSocket.emit('searchData', {
         'query': $("#searchCriteria").val(),
-        'lat': 45.5155,
-        'long': -122.6793,
+        'lat': lat,
+        'long': long,
         'geo': false
       });
     });
@@ -81,6 +92,24 @@ $(document).ready( () => {
       localStorage.setItem('long',Number(newLocation[1]));
       localStorage.setItem('option',$("#choices option:selected").text());
       initMap();
+    });
+
+
+    //Allow the user to change the default location of the search area.
+    //Whenever the selection is changed it will update the long and lat of the
+    //seach area
+    //The default is portland.
+    var selectLocation = $("#locations");
+    for(city in cities.cities)
+    {
+      var choice = $("<option />", {value: city, text: city});
+      selectLocation.append(choice);
+    }
+
+    $("#locations").on('change', () => {
+      var value = $("#locations option:selected").val();
+      lat = cities.cities[value].Lat;
+      long = cities.cities[value].Long;
     });
 
     initMap = () => {

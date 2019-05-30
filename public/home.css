@@ -1,4 +1,100 @@
+body {
+  margin: 0;
+}
+
+.navbar {
+  background-color: #659DBD;
+}
+.title {
+  font-weight: bold;
+  font-size: 2em;
+  color: white;
+}
+
+.jumbotron {
+  border-radius: 0;
+  padding: 1rem 15rem;
+  margin: 0;
+  color: white;
+  text-align: center;
+  background-color: inherit;
+  background-color: #659DBD;
+}
+
+.gradient {
+  height: 5vh;
+  background-image: linear-gradient(to bottom, #659DBD, #DAAD86);
+}
+
+.content-container {
+  padding: 0 15px;
+  height: 75vh;
+  background-color: #DAAD86;
+  display: grid;
+  grid-template-columns: [one] 35%  [two] 2.5% [three] 10% [four] 5% [five] 47.5%;
+  grid-template-rows: [top] 10% [mid] 10% [midbot] 70% [bottom] 10%;
+}
+
 #map {
-  height: 400px;
-  width: 100%;
+  margin: 10px;
+  background-color: antiquewhite;
+  grid-column-start: five;
+  grid-row-start: top;
+  grid-row-end: bottom;
+}
+
+#searchCriteria {
+  margin: 10px;
+  grid-column-start: one;
+  grid-row-start: top;
+  grid-row-end: mid;
+}
+
+#searchButton {
+  margin: 10px;
+  grid-column-start: three;
+  grid-column-end: four;
+  grid-row-start: top;
+  grid-row-end: mid;
+}
+
+#geolocation {
+  margin: 10px;
+  grid-column-start: one;
+  grid-column-end: four;
+  grid-row-start: mid;
+  grid-row-end: midbot;
+}
+
+#choicesContainer {
+  margin: 10px;
+  grid-column-start: one;
+  grid-column-end: four;
+  grid-row-start: midbot;
+  grid-row-end: bottom;
+}
+
+#choices {
+ width: 100%;
+ height: 100%;
+}
+
+#to_results {
+  margin: 10px;
+  grid-column-start: five;
+  grid-row-start: bottom;
+  grid-row-end: end;
+}
+
+#locationContainer {
+  margin: 10px;
+  grid-column-start: one;
+  grid-column-end: four;
+  grid-row-start: bottom;
+
+}
+
+.btn {
+  background-color: #8D8741;
+  border-color: #8D8741;
 }

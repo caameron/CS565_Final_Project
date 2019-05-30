@@ -63,10 +63,7 @@ io.on('connection', (objectSocket) => {
         query: data.query,
         language: 'en',
         location: [data.lat, data.long],
-        radius: 100000,
-        minprice: 1,
-        maxprice: 4,
-        opennow: true
+        radius: 100000
         }, (err, response) => {
         if(!err){
           dataSearch = response.json.results;
@@ -85,10 +82,7 @@ io.on('connection', (objectSocket) => {
         query: data.query,
         language: 'en',
         location: [data.lat, data.long],
-        radius: 5000,
-        minprice: 1,
-        maxprice: 4,
-        opennow: true
+        radius: 500000
         }, (err, response) => {
         if(!err){
           dataSearch = response.json.results;
