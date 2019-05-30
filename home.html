@@ -4,6 +4,8 @@
     <!--Using google maps api, implementation based on documentation here  https://developers.google.com/maps/documentation/javascript/tutorial-->
     <meta charset="utf-8">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="key.js"></script>
     <link rel="stylesheet" type="text/css" href="home.css">
@@ -11,24 +13,34 @@
     <title>CS565 Project</title>
   </head>
   <body>
-    <div class="header">
-      <h1>Project Title and Picture</h1>
-      <!-- image here -->
+    <nav class="navbar justify-content-center">
+      <p class="title">Hiking Weather</p>
+    </nav>
+    <div class="jumbotron">
+      <p class="lead">
+        Welcome to our Web Application!
+        <br>
+        A fun day of hiking can be ruined if you are not prepared for the right weather. This website will allow you to search for hikes/trails
+        of your choice or see what hikes are around you. The results will be displayed on a map so you know exactly which hike you are looking at.
+        When you have chosen your hike click the "Get Weather" button to see the current weather.
+      </p>
     </div>
-    <div class="description-container">Place Holder</div>
+    <div class="gradient">
+    </div>
     <div class="content-container">
-      <input type="text" id="searchCriteria" name="searchCriteria" placeholder="search" value="park">
-      <button id="searchButton">search</button>
-      <button id="geolocation">around me</button>
+      <input type="text" id="searchCriteria" class="form-control" name="searchCriteria" placeholder="search" value="park">
+      <button id="searchButton" class="btn btn-primary">search</button>
+      <button id="geolocation" class="btn btn-primary">Use Current Location</button>
       <br>
       <div id="map"></div>
       <div id="choicesContainer">
-        <select id="choices" size="5">
+        <select id="choices" class="custom-select" size="5">
           <option value="First" selected="selected">Search Results</option>
         </select>
       </div>
-      <!-- <button type="button" id="to_results">RESULTS SUBMIT</button> -->
+      <button type="button" id="to_results" class="btn btn-primary">Get Weather</button>
     </div>
+    <footer></footer>
   </body>
 
   <script id="mapsScript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt_YlKrQAlnqEYjcaRwUAuAMat60S578E&callback=initMap"
