@@ -10,7 +10,7 @@ var https = require('https');
 var server = express();
 server.use(express.static(__dirname + '/public'));
 var googleMapsClient = require('@google/maps').createClient({
-  key: myKey
+  key: 'AIzaSyAt_YlKrQAlnqEYjcaRwUAuAMat60S578E'
 });
 server.use(parser.json());
 server.use(parser.urlencoded({extended: true}));
