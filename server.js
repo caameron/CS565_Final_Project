@@ -4,7 +4,6 @@ var express = require('express');
 var path = require('path');
 var parser = require('body-parser');
 var socket = require('socket.io');
-var myKey = require('./public/key.js');
 var https = require('https');
 
 var server = express();
