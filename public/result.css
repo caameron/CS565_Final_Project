@@ -1,13 +1,17 @@
 
 .jumbotron{
-  margin-left: 200px;
-  margin-right: 200px;
+  margin-left: 250px;
+  margin-right: 250px;
   /* background-image: url("https://i1.wp.com/www.eeinnovationsltd.com/wp-content/uploads/2018/08/blue-sky.jpg?w=1920&ssl=1"); */
   background-color: white;
   background-size: 100% 100%;
   color: white;
   padding-top: 18px;
   padding-bottom: 18px;
+}
+
+#date{
+  color: gray;
 }
 
 #w_icon{
@@ -29,7 +33,7 @@
 }
 
 #head_title {
-color: #C8C8C8;
+color: silver;
 }
 
 #temp{
