@@ -22,5 +22,8 @@ $(document).ready( () => {
     console.log(data.info["main"]);
     var icon = "http://openweathermap.org/img/w/" + data.info["weather"][0]["icon"] + ".png";
     $('#w_icon').attr('src', icon);
+    document.getElementById("head_title").innerHTML = data.option;
+    var far = Math.round(((data.info["main"]["temp"]- 273.15)*1.8)+32);
+    $("#temp").append(far + '&#8457;');
   });
 });
