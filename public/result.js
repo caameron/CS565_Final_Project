@@ -25,5 +25,8 @@ $(document).ready( () => {
     document.getElementById("head_title").innerHTML = data.option;
     var far = Math.round(((data.info["main"]["temp"]- 273.15)*1.8)+32);
     $("#temp").append(far + '&#8457;');
+    var minmax = Math.round(((data.info["main"]["temp_min"]- 273.15)*1.8)+32) + '&#176;' + " " + Math.round(((data.info["main"]["temp_max"]- 273.15)*1.8)+32) + '&#176;';
+    document.getElementById("min_max").innerHTML = minmax;
+    document.getElementById("description").innerHTML = data.info["weather"][0]["description"];
   });
 });

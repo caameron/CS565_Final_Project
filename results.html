@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -22,6 +23,8 @@
           <h3 id = head_title>Weather Information</h3>
           <!-- <button type="button" id = "to_home" class="btn btn-primary btn-lg">&larr; Back to Search</button> -->
           <p id = "temp"><img id="w_icon" src="" alt="Weather icon"></p>
+          <div id = min_max></div>
+          <div id = description></div>
         </div>
       </div>
       </div>
