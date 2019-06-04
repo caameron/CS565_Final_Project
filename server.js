@@ -27,33 +27,6 @@ io.on('connection', (objectSocket) => {
   console.log("CONNECTED");
   //When data is sent, use places api to search for nearby places and then
   //send them back to client using socket
-  //   objectSocket.on('searchData', (data) => {
-  //     console.log(data);
-  //     var long = Number(data.long);
-  //     var lat = Number(data.lat);
-  //     console.log(typeof 45.22);
-  //     console.log(long);
-  //     googleMapsClient.places({
-  //       query: data.query,
-  //       language: 'en',
-  //       location: {"lat":data.lat, "lng":data.long},
-  //       radius: 5000,
-  //       minprice: 1,
-  //       maxprice: 4,
-  //       opennow: true
-  //       }, (err, response) => {
-  //       if(!err){
-  //         dataSearch = response.json.results;
-  //         objectSocket.emit('searchResults', {
-  //           'results': dataSearch,
-  //           'query': data.query
-  //         });
-  //       }
-  //       else{
-  //         console.log(err);
-  //       }
-  //     });
-  // });
   objectSocket.on('searchData', (data) => {
     if (data.geo === true){
       console.log(data.long + " " + data.lat);
@@ -81,7 +54,7 @@ io.on('connection', (objectSocket) => {
         query: data.query,
         language: 'en',
         location: [data.lat, data.long],
-        radius: 500000
+        radius: 50000
         }, (err, response) => {
         if(!err){
           dataSearch = response.json.results;
