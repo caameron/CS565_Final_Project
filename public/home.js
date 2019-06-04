@@ -29,7 +29,6 @@ $(document).ready( () => {
     });
 
     $('#searchButton').on('click', () => {
-      console.log("DS");
       objectSocket.emit('searchData', {
         'query': $("#searchCriteria").val(),
         'lat': lat,
@@ -57,6 +56,11 @@ $(document).ready( () => {
       });
     }
 
+    //If there is backDeatils set elements to previous search searchCriteria
+    objectSocket.on('backDetails', (data) => {
+      $("#searchCriteria").val(data.query);
+    });
+
     objectSocket.on('searchResults', (data) => {
       $("#choices").empty();
       var selectList = $("#choices");
@@ -76,6 +80,7 @@ $(document).ready( () => {
       localStorage.setItem('lat',data.results[0].geometry.location.lat);
       localStorage.setItem('long',data.results[0].geometry.location.lng);
       localStorage.setItem('option',data.results[0].formatted_address);
+      localStorage.setItem('query', data.query);
       initMap();
     });
 

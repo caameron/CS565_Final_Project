@@ -22,38 +22,41 @@ var lat_info = "";
 var long_info = "";
 var option_info = "";
 var info_info = "";
+let back = false;
+let backQuery = undefined;
+let backLat = undefined;
+let backLong = undefined;
 
 io.on('connection', (objectSocket) => {
   console.log("CONNECTED");
+  //If we are coming back from the results page, search for places Using
+  //previous search criteria and render it for the page.
+  if(back === true) {
+    objectSocket.emit('backDetails', {
+      'query': backQuery
+    });
+    googleMapsClient.places({
+      query: backQuery,
+      language: 'en',
+      location: [backLat, backLong],
+      radius: 50000
+      }, (err, response) => {
+      if(!err){
+        dataSearch = response.json.results;
+        objectSocket.emit('searchResults', {
+          'results': dataSearch,
+          'query': backQuery
+        });
+      }
+      else{
+        console.log(err);
+      }
+    });
+    back = false;
+  }
+
   //When data is sent, use places api to search for nearby places and then
   //send them back to client using socket
-  //   objectSocket.on('searchData', (data) => {
-  //     console.log(data);
-  //     var long = Number(data.long);
-  //     var lat = Number(data.lat);
-  //     console.log(typeof 45.22);
-  //     console.log(long);
-  //     googleMapsClient.places({
-  //       query: data.query,
-  //       language: 'en',
-  //       location: {"lat":data.lat, "lng":data.long},
-  //       radius: 5000,
-  //       minprice: 1,
-  //       maxprice: 4,
-  //       opennow: true
-  //       }, (err, response) => {
-  //       if(!err){
-  //         dataSearch = response.json.results;
-  //         objectSocket.emit('searchResults', {
-  //           'results': dataSearch,
-  //           'query': data.query
-  //         });
-  //       }
-  //       else{
-  //         console.log(err);
-  //       }
-  //     });
-  // });
   objectSocket.on('searchData', (data) => {
     if (data.geo === true){
       console.log(data.long + " " + data.lat);
@@ -81,7 +84,7 @@ io.on('connection', (objectSocket) => {
         query: data.query,
         language: 'en',
         location: [data.lat, data.long],
-        radius: 500000
+        radius: 50000
         }, (err, response) => {
         if(!err){
           dataSearch = response.json.results;
@@ -97,7 +100,6 @@ io.on('connection', (objectSocket) => {
     }
   });
   objectSocket.on('searchWeather', (data) => {
-    console.log("HEREER");
     https.get('https://api.openweathermap.org/data/2.5/weather?lat='+data.lat+'&lon='+data.long+'&appid=9fa05a0944cccb31dad4729352b5c805', (resp) => {
     let weather = '';
 
@@ -124,6 +126,14 @@ io.on('connection', (objectSocket) => {
 //Home Page
 server.get('/', (req, res) => {
   res.status(200);
+  //check for previous seach criteria
+  if(req.query.query !== undefined) {
+    backQuery = req.query.query;
+    backLat = req.query.lat;
+    backLong = req.query.long;
+    back = true;
+  }
+
   res.sendFile(path.join(__dirname + '/home.html'))
 });
 
