@@ -2,7 +2,10 @@ $(document).ready( () => {
   var objectSocket = io.connect("/");
 
   $("#to_home").click(() =>{
-    location.href = "/";
+    var query = "query=" + localStorage.getItem('query');
+    var lat = "&lat=" + localStorage.getItem('lat');
+    var long = "&long=" + localStorage.getItem('long');
+    location.href = "/?" + query + lat + long;
   });
 
   objectSocket.emit('searchWeather', {
@@ -31,5 +34,7 @@ $(document).ready( () => {
     var final = new Date(data.info['dt'] * 1000);
     // console.log(final);
     document.getElementById("date").innerHTML = final;
+
+
   });
 });

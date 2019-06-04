@@ -29,7 +29,6 @@ $(document).ready( () => {
     });
 
     $('#searchButton').on('click', () => {
-      console.log("DS");
       objectSocket.emit('searchData', {
         'query': $("#searchCriteria").val(),
         'lat': lat,
@@ -76,6 +75,7 @@ $(document).ready( () => {
       localStorage.setItem('lat',data.results[0].geometry.location.lat);
       localStorage.setItem('long',data.results[0].geometry.location.lng);
       localStorage.setItem('option',data.results[0].formatted_address);
+      localStorage.setItem('query', data.query);
       initMap();
     });
 
