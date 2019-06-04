@@ -56,6 +56,11 @@ $(document).ready( () => {
       });
     }
 
+    //If there is backDeatils set elements to previous search searchCriteria
+    objectSocket.on('backDetails', (data) => {
+      $("#searchCriteria").val(data.query);
+    });
+
     objectSocket.on('searchResults', (data) => {
       $("#choices").empty();
       var selectList = $("#choices");

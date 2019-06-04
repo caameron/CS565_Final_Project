@@ -29,11 +29,12 @@ let backLong = undefined;
 
 io.on('connection', (objectSocket) => {
   console.log("CONNECTED");
-  console.log(backQuery);
   //If we are coming back from the results page, search for places Using
   //previous search criteria and render it for the page.
   if(back === true) {
-    console.log("BACK");
+    objectSocket.emit('backDetails', {
+      'query': backQuery
+    });
     googleMapsClient.places({
       query: backQuery,
       language: 'en',
@@ -51,6 +52,7 @@ io.on('connection', (objectSocket) => {
         console.log(err);
       }
     });
+    back = false;
   }
 
   //When data is sent, use places api to search for nearby places and then
@@ -131,6 +133,7 @@ server.get('/', (req, res) => {
     backLong = req.query.long;
     back = true;
   }
+
   res.sendFile(path.join(__dirname + '/home.html'))
 });
 
