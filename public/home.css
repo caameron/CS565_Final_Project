@@ -3,36 +3,72 @@ body {
 }
 
 .navbar {
-  background-color: #659DBD;
+  /* background-color: #659DBD; */
+  background-color: white;
 }
+
+#hike-icon {
+  height: 50px;
+  width: 50px;
+}
+
+.background{
+  /* background-image: url("./pictures/home-back.jpg");
+  background-size: cover; */
+  width: 100%;
+  height: 500px;
+}
+
+#backgroundImg {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
 .title {
   font-weight: bold;
   font-size: 2em;
-  color: white;
+  color: #005E83;
 }
 
 .jumbotron {
   border-radius: 0;
-  padding: 1rem 15rem;
+  padding: 3rem 15rem;
   margin: 0;
-  color: white;
+  color: #414141;
   text-align: center;
   background-color: inherit;
-  background-color: #659DBD;
+  top: 0;
+  left: 0;
+  font-family: 'Archivo', sans-serif;
+  /* background-color: #659DBD; */
 }
 
-.gradient {
+.lead {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* .gradient {
   height: 5vh;
   background-image: linear-gradient(to bottom, #659DBD, #DAAD86);
-}
+} */
 
 .content-container {
-  padding: 0 15px;
+  z-index: 10;
+  padding: 0 75px;
   height: 75vh;
-  background-color: #DAAD86;
+  /* background-color: #DAAD86; */
   display: grid;
   grid-template-columns: [one] 35%  [two] 2.5% [three] 10% [four] 5% [five] 47.5%;
   grid-template-rows: [top] 10% [mid] 10% [midbot] 70% [bottom] 10%;
+  font-family: 'Archivo', sans-serif;
+}
+
+h2.break {
+  margin: 0 75px 50px 75px;
+  border-bottom: black 2px solid;
 }
 
 #map {
@@ -72,6 +108,7 @@ body {
   grid-column-end: four;
   grid-row-start: midbot;
   grid-row-end: bottom;
+  font-family: 'Archivo', sans-serif;
 }
 
 #choices {
@@ -91,10 +128,15 @@ body {
   grid-column-start: one;
   grid-column-end: four;
   grid-row-start: bottom;
-
+  font-family: 'Archivo', sans-serif;
 }
 
 .btn {
-  background-color: #8D8741;
-  border-color: #8D8741;
+  font-family: 'Archivo', sans-serif;
+  background-color: #7C9839;
+  border-color: #7C9839;
+}
+
+footer {
+  height: 50px;
 }
