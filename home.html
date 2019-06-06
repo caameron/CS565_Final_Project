@@ -8,14 +8,29 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="key.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Archivo&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="home.css">
     <script type="text/javascript" src="home.js"></script>
     <title>CS565 Project</title>
   </head>
   <body>
-    <nav class="navbar justify-content-center">
+    <nav class="navbar">
       <p class="title">Hiking Weather</p>
+      <img id="hike-icon" src="./pictures/hike-icon.png" alt="hike-icon">
+      <a class="navbar-brand" style="color:#005E83;font-weight:bold;font-size:2em" href="https://github.com/caameron/CS565_Final_Project">GITHUB</a>
     </nav>
+    <div class="background">
+    <img src="./pictures/bg-wide.jpg" id="backgroundImg" alt="header-background-img">
+    <!-- <div class="jumbotron">
+      <p class="lead">
+        Welcome to our Web Application!
+        <br>
+        A fun day of hiking can be ruined if you are not prepared for the right weather. This website will allow you to search for hikes/trails
+        of your choice or see what hikes are around you. The results will be displayed on a map so you know exactly which hike you are looking at.
+        When you have chosen your hike click the "Get Weather" button to see the current weather.
+      </p>
+    </div> -->
+    </div>
     <div class="jumbotron">
       <p class="lead">
         Welcome to our Web Application!
@@ -25,8 +40,7 @@
         When you have chosen your hike click the "Get Weather" button to see the current weather.
       </p>
     </div>
-    <div class="gradient">
-    </div>
+    <h2 class="break">SEARCH FOR A HIKE</h2>
     <div class="content-container">
       <input type="text" id="searchCriteria" class="form-control" name="searchCriteria" placeholder="Enter in a hike">
       <button id="searchButton" class="btn btn-primary">search</button>
@@ -44,6 +58,7 @@
       </div>
       <button type="button" id="to_results" class="btn btn-primary">Get Weather</button>
     </div>
+    <footer></footer>
   </body>
 
   <script id="mapsScript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt_YlKrQAlnqEYjcaRwUAuAMat60S578E&callback=initMap"
