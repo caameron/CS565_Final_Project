@@ -21,6 +21,7 @@
 #w_icon{
   width: 150px;
   height: 150px;
+  margin-right: 20px;
 }
 #temp{
   margin-bottom: 0px;
@@ -32,16 +33,18 @@
 }
 
 #min_max {
+  margin-top: 10px;
   color: gray;
   font-size: 20px;
 }
 
 #head_title {
-color: silver;
+color: #040404;
+font-weight:bold;
 }
 
 #temp{
-  color: #C8C8C8;
+  color: #040404;
   font-size: 50px;
   font-family: Verdana, Geneva, sans-serif;
 }
