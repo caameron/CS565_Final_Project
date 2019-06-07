@@ -9,6 +9,9 @@
   color: white;
   padding-top: 18px;
   padding-bottom: 18px;
+  posistion:relative;
+  z-index: 2;
+  box-shadow: 0 8px 20px -6px black;
 }
 
 #date{
