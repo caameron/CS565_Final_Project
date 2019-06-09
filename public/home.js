@@ -24,10 +24,12 @@ $(document).ready( () => {
 
     var objectSocket = io.connect("/");
 
+    //send user to results page
     $("#to_results").click(() =>{
       location.href = "results";
     });
 
+    //On click to emit data to server about search Criteria
     $('#searchButton').on('click', () => {
       objectSocket.emit('searchData', {
         'query': $("#searchCriteria").val(),
@@ -37,6 +39,7 @@ $(document).ready( () => {
       });
     });
 
+    //Get current location using geoloaction and then send that to the server
     $('#geolocation').on('click', () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(getCurrent);
@@ -61,6 +64,8 @@ $(document).ready( () => {
       $("#searchCriteria").val(data.query);
     });
 
+    //Make a list of select options for the user to choose from based off of the Results
+    //that were given by the server
     objectSocket.on('searchResults', (data) => {
       $("#choices").empty();
       var selectList = $("#choices");
@@ -117,6 +122,7 @@ $(document).ready( () => {
       long = cities.cities[value].Long;
     });
 
+    //Initialize the google map
     initMap = () => {
       var mapOptions = {
         center: {lat: lat, lng:long},

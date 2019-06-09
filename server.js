@@ -18,6 +18,8 @@ server.use(parser.urlencoded({extended: true}));
 var io = socket(server.listen(process.env.PORT || 3000));
 let dataSearch = 'toBeFilled';
 
+
+//Store variables for usage in API calls and other features
 var lat_info = "";
 var long_info = "";
 var option_info = "";
@@ -27,6 +29,8 @@ let backQuery = undefined;
 let backLat = undefined;
 let backLong = undefined;
 
+
+//Create Connection
 io.on('connection', (objectSocket) => {
   console.log("CONNECTED");
   //If we are coming back from the results page, search for places Using
@@ -55,8 +59,9 @@ io.on('connection', (objectSocket) => {
     back = false;
   }
 
-  //When data is sent, use places api to search for nearby places and then
+  //When data is sent through searchData emit, use places api to search for nearby places and then
   //send them back to client using socket
+  //If data.geo equals true use the current location of the user instead and just search for hikes
   objectSocket.on('searchData', (data) => {
     if (data.geo === true){
       console.log(data.long + " " + data.lat);
@@ -99,6 +104,8 @@ io.on('connection', (objectSocket) => {
       });
     }
   });
+
+  //Make call to weather api and send it back to the client for rendering on the results page
   objectSocket.on('searchWeather', (data) => {
     https.get('https://api.openweathermap.org/data/2.5/weather?lat='+data.lat+'&lon='+data.long+'&appid=9fa05a0944cccb31dad4729352b5c805', (resp) => {
     let weather = '';
